@@ -30,6 +30,14 @@ def get_books():
     books_list = [{"id": book.id, "title": book.title} for book in books]
     return jsonify(books_list)
 
+@app.route("/delete/<int:book_id>", methods=["POST"])
+def delete_book(book_id):
+    book = Book.query.get_or_404(book_id)
+    db.session.delete(book)
+    db.session.commit()
+    return redirect("/")
+
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()

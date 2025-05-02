@@ -51,9 +51,15 @@
     <h2>قائمة الكتب:</h2>
     <ul>
         {% for book in books %}
-            <li>{{ book.title }}</li>
+          <li>
+            {{ book.title }}
+            <form action="/delete/{{ book.id }}" method="POST" style="display:inline;">
+              <button type="submit">❌ حذف</button>
+            </form>
+          </li>
         {% endfor %}
-    </ul>
+      </ul>
+      
 
 </body>
 </html>
