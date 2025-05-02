@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-db-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-db
+  template:
+    metadata:
+      labels:
+        app: flask-db
+    spec:
+      containers:
+        - name: flask-db-container
+          image: myflaskapp
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - name: db-volume
+              mountPath: /app/instance
+      volumes:
+        - name: db-volume
+          emptyDir: {}
